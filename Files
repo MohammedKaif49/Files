@@ -1,0 +1,46 @@
+//# Files
+//Write a C program to display the contents of the file in reverse order and also to copy the contents from one file to another file.
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+int main()
+{
+    FILE *fp;
+    char ch ,arr[500];
+    int i=0, j, count=0;
+    fp = fopen("source.txt", "r"); //give your file name 
+    if(!fp)
+    {
+        printf("Error in opening the file");
+        getch();
+        return 0;
+    }
+    printf("The content of the file is : ");
+    ch = getc(fp);
+    while(ch!=EOF)
+    {
+    	count++;
+    	putchar(ch);
+    	arr[i]= ch;
+    	i++;
+    	ch = getc(fp);
+	}
+	printf("\n\nThe content of the file in reverse order is : ");
+	for(j=(count-1);j>=0;j--)
+	{
+		ch = arr[j];
+		printf("%c",ch);
+	}   
+	FILE *fp2;
+	fp2 = fopen("insert.txt","w");
+	ch= fgetc(fp);
+	while(ch!=EOF)
+	{
+		fputc(ch ,fp2);
+		ch = fgetc(fp);
+	}
+	fclose(fp);
+	fclose(fp2);
+	getch();
+	return 0;
+}
